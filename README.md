@@ -53,12 +53,12 @@ Button Listeners: Implement functionality for "Check Solution", "Reset", and "Ne
 
 Initial Setup: Calls createGrid() and loadPuzzle() to start the game when the page loads.
 
-To Use:
+**To Use:**
 
-Save the HTML code as index.html.
+* Save the HTML code as index.html.
 
-Save the CSS code as style.css in the same folder.
+* Save the CSS code as style.css in the same folder.
 
-Save the JavaScript code as script.js in the same folder.
+* Save the JavaScript code as script.js in the same folder.
 
-Open index.html in your web browser.
+* Open index.html in your web browser.
