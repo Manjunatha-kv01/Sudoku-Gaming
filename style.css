@@ -1,0 +1,141 @@
+body {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column; /* Stack title and game */
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    margin: 0;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+#game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#sudoku-grid {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+    width: 450px; /* Adjust size as needed */
+    height: 450px;
+    border: 3px solid #333;
+    background-color: #fff;
+    margin-bottom: 20px; /* Space below grid */
+}
+
+.cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    font-size: 1.5em; /* Adjust font size */
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    /* Make divs behave like text inputs for contenteditable */
+    line-height: 1; /* Ensure text is centered vertically */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    outline: none; /* Remove default outline on focus */
+    text-align: center;
+}
+
+/* Thicker borders for 3x3 subgrids */
+.cell:nth-child(3n) {
+    border-right: 2px solid #666;
+}
+.cell:nth-child(9n) {
+    border-right: 3px solid #333; /* Grid edge */
+}
+/* Select rows 3 and 6 (cells 19-27 and 46-54) */
+.cell:nth-of-type(n+19):nth-of-type(-n+27),
+.cell:nth-of-type(n+46):nth-of-type(-n+54) {
+    border-bottom: 2px solid #666;
+}
+/* Select row 9 (cells 73-81) */
+.cell:nth-of-type(n+73):nth-of-type(-n+81) {
+     border-bottom: 3px solid #333; /* Grid edge */
+}
+/* Fix edge cases for top/left borders implicitly set by grid border */
+.cell:nth-child(-n+9) {
+    border-top: 3px solid #333;
+}
+.cell:nth-child(9n+1) {
+     border-left: 3px solid #333;
+}
+
+
+.cell.prefilled {
+    background-color: #eee;
+    color: #444;
+    cursor: not-allowed;
+}
+
+.cell.editable {
+    color: #007bff;
+}
+
+.cell:focus {
+    background-color: #e8f0fe; /* Light blue when focused */
+}
+
+.cell.selected {
+    background-color: #cce5ff; /* Slightly darker blue for selected */
+}
+
+.cell.highlighted {
+    background-color: #e0e0e0;
+}
+
+/* Ensure selected and highlighted don't override prefilled bg too much */
+.cell.prefilled.selected,
+.cell.prefilled.highlighted {
+     background-color: #d9d9d9; /* Darker grey for prefilled highlight/select */
+}
+.cell.prefilled.selected {
+     background-color: #c0c0c0;
+}
+
+
+.cell.error {
+    background-color: #f8d7da; /* Light red for errors */
+    color: #721c24; /* Dark red text for errors */
+    position: relative; /* For potential error icon/indicator */
+}
+.cell.error::after { /* Optional: small red dot for error */
+    content: '';
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    width: 6px;
+    height: 6px;
+    background-color: red;
+    border-radius: 50%;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1em;
+    margin: 5px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #e7e7e7;
+}
+
+button:hover {
+    background-color: #ddd;
+}
+
+#status-message {
+    margin-top: 10px;
+    font-weight: bold;
+    min-height: 1.2em; /* Prevent layout shift */
+}
